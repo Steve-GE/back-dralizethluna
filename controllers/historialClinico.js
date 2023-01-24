@@ -62,6 +62,8 @@ const addHistorialClinico = (req, res) => {
     const { antHeredofamiliares, idPatient, antPersonalesNoPatologicos, antAndrologicos, antPersonalesPatologicos,
         resumExpYPadActual, tratPrevHospitalizacion, inteAparatosSistemas, examLabIngreso,
         gabineteIngreso, diagnostico, extras } = req.body
+
+        console.log(req.body);
     try {
         let sql = `INSERT INTO historialClinico(idPatient, antHeredofamiliares,antPersonalesNoPatologicos,antAndrologicos,
         antPersonalesPatologicos, resumExpYPadActual, tratPrevHospitalizacion, inteAparatosSistemas, examLabIngreso,
