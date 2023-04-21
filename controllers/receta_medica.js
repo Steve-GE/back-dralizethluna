@@ -24,7 +24,7 @@ const getAllRecetaMedica = (req, res) => {
 const getRecetaMedicaID = (req, res) => {
     const { id } = req.params;
     try {
-        let sql = `SELECT * FROM (recetamedica r INNER JOIN Patients p ON r.idPatient = p.id) WHERE p.id = ?`;
+        let sql = `SELECT * FROM (recetaMedica r INNER JOIN Patients p ON r.idPatient = p.id) WHERE p.id = ?`;
         conexion.query(sql, [id], (err, rows, fields) => {
             if (err) throw err;
             else {

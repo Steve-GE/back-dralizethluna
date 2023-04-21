@@ -1,5 +1,4 @@
-(function($) {
-    "use strict";
+(function($) { 
 
 	/* ..............................................
 	Loader
@@ -14,6 +13,29 @@
 	/* ..............................................
     Navbar Bar
     ................................................. */
+	(function($) { // Begin jQuery
+		$(function() { // DOM ready
+		  // If a link has a dropdown, add sub menu toggle.
+		  $('nav ul li a:not(:only-child)').click(function(e) {
+			$(this).siblings('.nav-dropdown').toggle();
+			// Close one dropdown when selecting another
+			$('.nav-dropdown').not($(this).siblings()).hide();
+			e.stopPropagation();
+		  });
+		  // Clicking away from dropdown will remove the dropdown class
+		  $('html').click(function() {
+			$('.nav-dropdown').hide();
+		  });
+		  // Toggle open and close nav styles on click
+		  $('#nav-toggle').click(function() {
+			$('nav ul').slideToggle();
+		  });
+		  // Hamburger to X toggle
+		  $('#nav-toggle').on('click', function() {
+			this.classList.toggle('active');
+		  });
+		}); // end DOM ready
+	  })(jQuery); // end jQuery
 
 	$('.navbar-nav .nav-link').on('click', function() {
 		var toggle = $('.navbar-toggler').is(':visible');
@@ -57,88 +79,31 @@
     Gallery
     ................................................. */
 
-	$(document).ready(function() {
-		$('.popup-gallery').magnificPopup({
-			delegate: 'a',
-			type: 'image',
-			tLoading: 'Loading image #%curr%...',
-			mainClass: 'mfp-img-mobile',
-			gallery: {
-				enabled: true,
-				navigateByImgClick: true,
-				preload: [0,1] // Will preload 0 - before current, and 1 after the current image
-			},
-			image: {
-				tError: '<a href="%url%">The image #%curr%</a> could not be loaded.',
-				titleSrc: function(item) {
-					return item.el.attr('title') + '<small>Dra. Lizeth Luna</small>';
-				}
-			}
-		});
-	});
+	// $(document).ready(function() {
+	// 	$('.popup-gallery').magnificPopup({
+	// 		delegate: 'a',
+	// 		type: 'image',
+	// 		tLoading: 'Loading image #%curr%...',
+	// 		mainClass: 'mfp-img-mobile',
+	// 		gallery: {
+	// 			enabled: true,
+	// 			navigateByImgClick: true,
+	// 			preload: [0,1] // Will preload 0 - before current, and 1 after the current image
+	// 		},
+	// 		image: {
+	// 			tError: '<a href="%url%">The image #%curr%</a> could not be loaded.',
+	// 			titleSrc: function(item) {
+	// 				return item.el.attr('title') + '<small>Dra. Lizeth Luna</small>';
+	// 			}
+	// 		}
+	// 	});
+	// });
 
 	/* ..............................................
     Gallery
     ................................................. */
 
-	$(document).ready(function() {
-		$('.owl-carousel').owlCarousel({
-			loop: true,
-			margin: 10,
-			dots: false,
-			//autoplay: true,
-            //autoplayTimeout: 3000,
-            //autoplayHoverPause: true,
-			responsiveClass: true,
-			responsive: {
-			  0: {
-				items: 1,
-				nav: true
-			  },
-			  600: {
-				items: 2,
-				nav: false
-			  },
-			  1000: {
-				items: 3,
-				nav: true,
-				// loop: false,
-				// margin: 15
-			  }
-			}
-		})
-	})
-
-	$(document).ready(function() {
-		$('.owl-carousel2').owlCarousel({
-			loop: true,
-			margin: 10,
-			dots: false,
-			//autoplay: true,
-            //autoplayTimeout: 3000,
-            //autoplayHoverPause: true,
-			responsiveClass: true,
-			responsive: {
-			  0: {
-				items: 1,
-				nav: true
-			  },
-			  600: {
-				items: 3,
-				nav: false
-			  },
-			  1000: {
-				items: 4,
-				nav: true,
-				loop: false,
-				margin: 15
-			  }
-			}
-		})
-	})
 	
-	
-
 
 	/* ..............................................
     Scroll To Top

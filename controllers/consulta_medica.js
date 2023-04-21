@@ -24,7 +24,7 @@ const getAllConsulta = (req, res) => {
 const getConsultaID = (req, res) => {
     const { id } = req.params;
     try {
-        let sql = `select * from Consulta where idPatient = ?`;
+        let sql = `SELECT * from Consulta c INNER JOIN Patients p ON c.idPatient = p.id WHERE p.id = ?`;
         conexion.query(sql, [id], (err, rows, fields) => {
             if (err) throw err;
             else {

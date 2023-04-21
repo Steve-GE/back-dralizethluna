@@ -13,9 +13,14 @@ const { addRecetaMedica, updateRecetaMedica, getRecetaMedicaID } = require('../c
 const { addConsulta,  getConsultaID } = require('../controllers/consulta_medica');
 const { addHistorialClinico, getHistorialClinicoID, updateHistorialClinico, getReporteHistorialClinicoID } = require('../controllers/historialClinico');
 const { getRecetaMedicaIndividual } = require('../controllers/reportes_tablas');
+const { data } = require('../controllers/data');uploadConsultaImg
+const { getAllArchivosPaciente, deleteArchivoPaciente, uploadArchivo, uploadArchivoPaciente } = require('../controllers/archivos_pacientes');
 
 // Authentication
 router.post('/authenticate',[], loginUsuario);
+
+router.get('/data',[], data);
+
 // router.post('/register',[], register);
 
 // Appoinments
@@ -79,9 +84,13 @@ router.post('/addCorreoWeb',[], addCorreoWeb);
 // Cotizaciones
 router.get('/getAllCotizaciones',[], getAllCotizaciones);
 router.delete('/deleteCotizacion:id',[], deleteCotizacion);
-
 router.post('/uploadCotizacion', uploadCotizacionArchivo, uploadCotizacion);
 
+
+// Archvivos pacientes
+router.get('/getAllArchivosPaciente:id',[], getAllArchivosPaciente);
+router.delete('/deleteArchivoPaciente:id',[], deleteArchivoPaciente);
+router.post('/uploadArchivoPaciente:id', uploadArchivo, uploadArchivoPaciente);
 
 // PROVEEDORES
 router.get('/getAllProveedores',[], getAllProveedores);

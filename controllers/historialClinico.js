@@ -27,7 +27,7 @@ const getHistorialClinicoID = (req, res) => {
 
     try {
         let sql = `SELECT c.idHistorialClinico, c.idPatient, c.antHeredofamiliares, c.antPersonalesNoPatologicos, c.antAndrologicos, c.antPersonalesPatologicos, c.resumExpYPadActual, c.tratPrevHospitalizacion,
-    c.inteAparatosSistemas,c.examLabIngreso, c.gabineteIngreso, c.diagnostico, c.extras  FROM historialClinico c
+    c.inteAparatosSistemas,c.examLabIngreso, c.gabineteIngreso, c.diagnostico, c.extras, c.alergias, c.diagnosticoPropuesto, c.cirugias, c.inmunizacionesRecientes  FROM historialClinico c
      where idPatient = ?`;
         conexion.query(sql, [id], (err, rows, fields) => {
             if (err) throw err;
@@ -61,15 +61,16 @@ const getReporteHistorialClinicoID = (req, res) => {
 const addHistorialClinico = (req, res) => {
     const { antHeredofamiliares, idPatient, antPersonalesNoPatologicos, antAndrologicos, antPersonalesPatologicos,
         resumExpYPadActual, tratPrevHospitalizacion, inteAparatosSistemas, examLabIngreso,
-        gabineteIngreso, diagnostico, extras } = req.body
+        gabineteIngreso, diagnostico, extras, alergias, diagnosticoPropuesto, cirugias, inmunizacionesRecientes } = req.body
 
         console.log(req.body);
     try {
         let sql = `INSERT INTO historialClinico(idPatient, antHeredofamiliares,antPersonalesNoPatologicos,antAndrologicos,
         antPersonalesPatologicos, resumExpYPadActual, tratPrevHospitalizacion, inteAparatosSistemas, examLabIngreso,
-        gabineteIngreso, diagnostico, extras) 
+        gabineteIngreso, diagnostico, extras, alergias, diagnosticoPropuesto, cirugias, inmunizacionesRecientes) 
                 values  ('${idPatient}','${antHeredofamiliares}',  '${antPersonalesNoPatologicos}', '${antAndrologicos}', '${antPersonalesPatologicos}', '${resumExpYPadActual}', 
-                '${tratPrevHospitalizacion}', '${inteAparatosSistemas}', '${examLabIngreso}', '${gabineteIngreso}', '${diagnostico}', '${extras}')`;
+                '${tratPrevHospitalizacion}', '${inteAparatosSistemas}', '${examLabIngreso}', '${gabineteIngreso}', '${diagnostico}', '${extras}',
+                '${alergias}','${diagnosticoPropuesto}','${cirugias}','${inmunizacionesRecientes}')`;
 
         conexion.query(sql, (err, rows, field) => {
             if (err) throw err
@@ -92,7 +93,7 @@ const updateHistorialClinico = (req, res) => {
     // const {id} = req.params;
     const { idPatient, antHeredofamiliares, antPersonalesNoPatologicos, antAndrologicos, antPersonalesPatologicos,
         resumExpYPadActual, tratPrevHospitalizacion, inteAparatosSistemas, examLabIngreso,
-        gabineteIngreso, diagnostico, extras } = req.body;
+        gabineteIngreso, diagnostico, extras,alergias, diagnosticoPropuesto, cirugias, inmunizacionesRecientes } = req.body;
     try {
         let sql = `update historialClinico set 
     antHeredofamiliares = '${antHeredofamiliares}',
@@ -105,7 +106,12 @@ const updateHistorialClinico = (req, res) => {
     examLabIngreso = '${examLabIngreso}',
     gabineteIngreso = '${gabineteIngreso}',
     diagnostico = '${diagnostico}',
-    extras = '${extras}'
+    extras = '${extras}',
+    alergias = '${alergias}',
+    diagnosticoPropuesto = '${diagnosticoPropuesto}',
+    cirugias = '${cirugias}',
+    inmunizacionesRecientes = '${inmunizacionesRecientes}'
+
     where idPatient = '${idPatient}'`;
 
         conexion.query(sql, (err, rows, fields) => {

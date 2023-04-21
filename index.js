@@ -14,7 +14,9 @@ const app = express();
 // dbConnection();
 
 // Directorio publico
-app.use( express.static('public'));
+// app.use( express.static('public'));
+app.use(express.static(path.join(__dirname, 'public')));
+
 
 // CORS
 app.use( cors() );
@@ -22,12 +24,18 @@ app.use( cors() );
 // Lectura y parseo del body.
 app.use( express.json());
 
+
+
 // Rutas
 app.use( '/api', require('./routes/routes') );
 
 //  Manejar de mas rutas.
-app.get('/', (req, res) => {
-    res.sendFile( path.resolve(__dirname, 'public/index.html'));
+// app.get('/', (req, res) => {
+//     res.sendFile( path.resolve(__dirname, 'public/index.html'));
+// });
+
+app.get('*', function (req, res) {
+    res.sendFile(path.join(__dirname, 'public/index.html'));
 });
 
 app.listen(process.env.PORT, ()=>{

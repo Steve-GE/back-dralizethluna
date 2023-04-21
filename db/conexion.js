@@ -1,17 +1,19 @@
-const mysql = require('mysql');
+const mysql = require('mysql2');
 
 const conexion = mysql.createConnection({
-    // host: 'sql9.freesqldatabase.com',
-    // user: 'sql9584173',
-    // password: 'ZIzh1YkKiI',
-    // port: 3306,
-    // database: 'sql9584173' 
-
-    host: '127.0.0.1',
-    user: 'root',
-    password: 'root',
+    host: '68.178.206.109',
+    user: 'usuario',
+    password: '7hvn04mQ.!',
     port: 3306,
-    database: 'test1'
+    database: 'BD_CONSULTAS',
+    keepAlive: true
+
+    //  host: '127.0.0.1',
+    // user: 'root',
+    // password: 'root',
+    // port: 3306,
+    // database: 'test1',
+    // keepAlive: true
 });
 
 conexion.connect((err) => {
@@ -21,6 +23,17 @@ conexion.connect((err) => {
     else{
         console.log('Conexión correcta.');
     }
+    conexion.query('SELECT VERSION()', function(error, results, fields) {
+        if (error) throw error;
+        console.log('Versión de MySQL: ', results[0]['VERSION()']);
+      });
+      // Enviar un ping periódico cada 5 minutos
+      setInterval(() => {
+        conexion.query('SELECT 1', (error) => {
+          if (error) throw error;
+        });
+      }, 500000);
 });
+
 
 module.exports = conexion;
